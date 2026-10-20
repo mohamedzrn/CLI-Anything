@@ -34,8 +34,11 @@ echo -e "${BLUE}  Build powerful CLI interfaces for any GUI application${NC}"
 echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 echo ""
 
-# Check if HARNESS.md exists
-HARNESS_PATH="/root/cli-anything/HARNESS.md"
+# Check if HARNESS.md exists.
+# Resolve it relative to this script so the plugin works for any user, not
+# just one with a checkout at /root/cli-anything.
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+HARNESS_PATH="${HARNESS_PATH:-$SCRIPT_DIR/../HARNESS.md}"
 if [ ! -f "$HARNESS_PATH" ]; then
     echo -e "${YELLOW}⚠️  HARNESS.md not found at $HARNESS_PATH${NC}"
     echo -e "${YELLOW}   The cli-anything methodology requires HARNESS.md${NC}"
